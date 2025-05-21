@@ -161,17 +161,13 @@ function syncAllPort(portObj){
 
 //  }
  var onCanvasMouseRelease=(id)=>{
-  try{
     console.log("device selected==>",id);
     const pointList=CircuitJS1.exportPointCircuit();
     const deviceList= CircuitJS1.exportDeviceCircuit();
     //console.log(pointList,deviceList)
    
-    let deviceJson=JSON.parse(deviceList);
-    deviceJson.sort((a,b)=>parseInt(a.id+"")-parseInt(b.id+""));
-    console.log("deviceJson==>",deviceJson)
-    let pointJson=JSON.parse(pointList);
-    pointJson.sort((a,b)=>parseInt(a.did+"")-parseInt(b.did+""))
+    const deviceJson=JSON.parse(deviceList);
+    const pointJson=JSON.parse(pointList);
     const deviceTypeObj=getDeviceData(deviceJson);
     const[pointObj,wireObj,wirePort]= getDeviceAndWirePoint(pointJson,deviceTypeObj)
     const portObj=getPortNames(pointObj);
@@ -188,10 +184,6 @@ function syncAllPort(portObj){
            cb({portObj,wireObj,wirePort,deviceTypeObj,deviceJson,pointObj,pointJson})
        }
      })
-    }
-    catch(err){
-      console.log("Error canvas==>",err)
-    }
  //    console.log("deviceList==>",getDeviceData(JSON.parse(deviceList)));
  }
 
